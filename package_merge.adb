@@ -9,13 +9,13 @@ package body Package_Merge is
    is
       Max_E : Natural := 0;
       
-      type CC_Item_Kind is (Single, Package);
+      type CC_Item_Kind is (Single, Pkg);
       type CC_Item (Kind : CC_Item_Kind := Single) is record
          Value : Weight_Type;
          case Kind is
             when Single =>
                Coin_Id : Positive;
-            when Package =>
+            when Pkg =>
                Left, Right : Positive;
          end case;
       end record;
@@ -87,7 +87,7 @@ package body Package_Merge is
                      W         : constant Weight_Type := Items(Left_Idx).Value + Items(Right_Idx).Value;
                   begin
                      Last_Item := Last_Item + 1;
-                     Items(Last_Item) := (Kind => Package, Value => W, Left => Left_Idx, Right => Right_Idx);
+                     Items(Last_Item) := (Kind => Pkg, Value => W, Left => Left_Idx, Right => Right_Idx);
                      Packages.Count := Packages.Count + 1;
                      Packages.Elements(Packages.Count) := Last_Item;
                   end;
@@ -197,12 +197,12 @@ package body Package_Merge is
          Max_Keep  : constant Natural := 2 * N - 2; -- Active pruning threshold
          Max_Nodes : constant Positive := N * Max_Length * 2;
          
-         type Node_Kind is (Leaf, Package);
+         type Node_Kind is (Leaf, Pkg);
          type Node_Record (Kind : Node_Kind := Leaf) is record
             Weight : Weight_Type;
             case Kind is
                when Leaf => Sym : Symbol_Index;
-               when Package => Left, Right : Positive;
+               when Pkg => Left, Right : Positive;
             end case;
          end record;
          
@@ -253,7 +253,7 @@ package body Package_Merge is
                      W         : constant Weight_Type := Nodes(Left_Idx).Weight + Nodes(Right_Idx).Weight;
                   begin
                      Last_Node := Last_Node + 1;
-                     Nodes(Last_Node) := (Kind => Package, Weight => W, Left => Left_Idx, Right => Right_Idx);
+                     Nodes(Last_Node) := (Kind => Pkg, Weight => W, Left => Left_Idx, Right => Right_Idx);
                      Packages.Count := Packages.Count + 1;
                      Packages.Elements(Packages.Count) := Last_Node;
                   end;
