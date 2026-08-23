@@ -32,7 +32,7 @@ package body Package_Merge is
       end record;
    begin
       if Target_Sum = 0 then
-         return (1 .. 0 => 1);
+         return Selected_Coins'(1 .. 0 => 1);
       end if;
 
       for C of Coins loop
@@ -155,7 +155,7 @@ package body Package_Merge is
    is
       N : constant Natural := Frequencies'Length;
    begin
-      if N < 2 then return (others => 1); end if;
+      if N < 2 then return Code_Lengths'(Frequencies'Range => 1); end if;
       if N > 2**Max_Length then raise Invalid_Frequencies with "Code length too short"; end if;
       
       declare
@@ -190,7 +190,7 @@ package body Package_Merge is
    is
       N : constant Natural := Frequencies'Length;
    begin
-      if N < 2 then return (others => 1); end if;
+      if N < 2 then return Code_Lengths'(Frequencies'Range => 1); end if;
       if N > 2**Max_Length then raise Invalid_Frequencies with "Code length too short"; end if;
       
       declare
@@ -321,7 +321,7 @@ package body Package_Merge is
    is
       N : constant Natural := Frequencies'Length;
    begin
-      if N < 2 then return (others => 1); end if;
+      if N < 2 then return Code_Lengths'(Frequencies'Range => 1); end if;
       if N > 2**Max_Length then raise Invalid_Frequencies with "Code length too short"; end if;
       
       declare
